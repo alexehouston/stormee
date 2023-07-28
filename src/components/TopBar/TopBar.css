@@ -1,7 +1,9 @@
-.TopBar {
-
-}
-
 .search-bar {
     background-color: var(--stormee-grey);
+    border: none;
+}
+
+input[type]:focus-visible {
+    outline: none;
+    text-decoration: none;
 }

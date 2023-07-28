@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useState, useEffect, useCallback } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDroplet,
@@ -31,18 +32,14 @@ const weatherIcons = {
   17: "snowflake",
 };
 
-const Forecast = () => {
+const Forecast = ({ latitude, longitude }) => {
   const [forecastData, setForecastData] = useState(null);
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=29.620&lon=-95.635&temperature=F&apikey=${apiKey}`
+        `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=${latitude}&lon=${longitude}&temperature=F&apikey=${apiKey}`
       );
       const data = await response.json();
       setForecastData(data);
@@ -50,7 +47,11 @@ const Forecast = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  }, [latitude, longitude]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   const getDayOfWeek = (dateString) => {
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -86,7 +87,9 @@ const Forecast = () => {
               >
                 <div className="forecast-date fw-bold">
                   <span>{getDayOfWeek(timeEntry)}</span>
-                  {index === selectedCardIndex && <span>{getFormattedDate(timeEntry)}</span>}
+                  {index === selectedCardIndex && (
+                    <span>{getFormattedDate(timeEntry)}</span>
+                  )}
                 </div>
                 <hr />
                 {forecastData.data_day.pictocode[index + 1] && (
@@ -133,6 +136,12 @@ const Forecast = () => {
       </div>
     </div>
   );
+};
+
+Forecast.propTypes = {
+  handleSearch: PropTypes.string.isRequired,
+  latitude: PropTypes.string.isRequired,
+  longitude: PropTypes.string.isRequired,
 };
 
 export default Forecast;
