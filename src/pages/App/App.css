@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+    --stormee-darkest-black: #111015;
+    --stormee-grey: #1b1b1d;
+    --stormee-light-grey: #323232;
+    --stormee-lightest-grey: #f3f3f3;
+    --stormee-white: #ffffff;
+    --stormee-sky-blue: #b9d5ea;
+    --stormee-lavender: #cbbbec;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+    background-color: var(--stormee-darkest-black);
+    font-family: 'Lexend', sans-serif;
+}
+
+.text-sky-blue {
+    color: var(--stormee-sky-blue);
+}
+
+.text-lavender {
+    color: var(--stormee-lavender);
+}

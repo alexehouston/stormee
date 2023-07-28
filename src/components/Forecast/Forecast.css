@@ -1,0 +1,41 @@
+.forecast-card {
+    background-color: var(--stormee-grey);
+    border-radius: 30px;
+    padding: 1.5rem;
+}
+
+.todays-forecast-card {
+    background: rgb(185,213,234);
+    background: linear-gradient(0deg, rgba(185,213,234,1) 78%, rgba(174,202,223,1) 78%);
+    width: 20rem;
+    color: var(--stormee-darkest-black);
+}
+
+.todays-forecast-card .forecast-date {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.todays-forecast-card hr {
+    display: none;
+}
+
+.todays-forecast-card {
+    position: relative;
+}
+
+.todays-forecast-card .forecast-icon {
+    position: absolute;
+    right: 15%;
+    bottom: 30%;
+    font-size: 5rem !important;
+}
+
+.todays-forecast-card .forecast-temp {
+    font-size: 4rem !important;
+}
+
+.todays-forecast-card .forecast-temp-hi, .todays-forecast-card .forecast-temp-lo {
+    font-size: 1.25rem !important;
+}

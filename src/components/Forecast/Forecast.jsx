@@ -1,5 +1,13 @@
 import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faDroplet,
+  faWind,
+  faSun,
+  faArrowUpLong,
+  faArrowDownLong,
+} from "@fortawesome/free-solid-svg-icons";
+import "./Forecast.css";
 
 const apiKey = import.meta.env.VITE_METEOBLUE_API_KEY;
 
@@ -20,12 +28,12 @@ const weatherIcons = {
   14: "cloud-showers-heavy",
   15: "snowflake",
   16: "cloud-rain",
-  17: "snowflake"
-
+  17: "snowflake",
 };
 
 const Forecast = () => {
   const [forecastData, setForecastData] = useState(null);
+  const [selectedCardIndex, setSelectedCardIndex] = useState(0);
 
   useEffect(() => {
     fetchData();
@@ -34,7 +42,7 @@ const Forecast = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=47.558&lon=7.573&temperature=F&apikey=${apiKey}`
+        `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=29.620&lon=-95.635&temperature=F&apikey=${apiKey}`
       );
       const data = await response.json();
       setForecastData(data);
@@ -57,31 +65,72 @@ const Forecast = () => {
     return `${month}/${day}`;
   };
 
+  const getWindDirection = (degrees) => {
+    const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+    const index = Math.round(degrees / 45) % 8;
+    return directions[index];
+  };
+
   return (
-    <div className="container-fluid">
-      {forecastData && (
-        <div className="d-flex justify-content-around text-center rounded bg-light shadow-lg">
-          {forecastData.data_day.time.slice(1).map((timeEntry, index) => (
-            <div className="p-5" key={index}>
-              <div className="fw-bold">{getDayOfWeek(timeEntry)}</div>
-              <div className="fw-bold">{getFormattedDate(timeEntry)}</div>
-              {forecastData.data_day.pictocode[index + 1] && (
-                <FontAwesomeIcon className="py-3 fs-3"
-                  icon={
-                    weatherIcons[forecastData.data_day.pictocode[index + 1]]
-                  }
-                />
-              )}
-              <div className="bg-danger rounded-pill px-2 text-white fw-bold">
-                {Math.round(forecastData.data_day.temperature_max[index])} °F
+    <div className="col-12 d-flex flex-column">
+      <div className="col-lg-12">
+        {forecastData && (
+          <div className="d-flex justify-content-around text-center">
+            {forecastData.data_day.time.slice(1).map((timeEntry, index) => (
+              <div
+                className={`forecast-card d-flex flex-column justify-content-around ${
+                  index === selectedCardIndex ? "todays-forecast-card" : ""
+                }`}
+                key={index}
+                onClick={() => setSelectedCardIndex(index)}
+              >
+                <div className="forecast-date fw-bold">
+                  <span>{getDayOfWeek(timeEntry)}</span>
+                  {index === selectedCardIndex && <span>{getFormattedDate(timeEntry)}</span>}
+                </div>
+                <hr />
+                {forecastData.data_day.pictocode[index + 1] && (
+                  <FontAwesomeIcon
+                    className="forecast-icon py-3 fs-1"
+                    icon={
+                      weatherIcons[forecastData.data_day.pictocode[index + 1]]
+                    }
+                  />
+                )}
+                <div className="d-flex">
+                  <p className="forecast-temp m-0 fs-1">
+                    {Math.round(forecastData.data_day.temperature_mean[index])}°
+                  </p>
+                </div>
+                {index === selectedCardIndex && (
+                  <div className="todays-forecast-data text-start">
+                    <FontAwesomeIcon icon={faArrowUpLong} />{" "}
+                    {Math.round(forecastData.data_day.temperature_max[index])}°{" "}
+                    <br />
+                    <FontAwesomeIcon icon={faArrowDownLong} />{" "}
+                    {Math.round(forecastData.data_day.temperature_min[index])}°{" "}
+                    <br />
+                    <FontAwesomeIcon icon={faSun} />{" "}
+                    {forecastData.data_day.uvindex[index]}{" "}
+                    <small>(UV Index)</small> <br />
+                    Humidity:{" "}
+                    {forecastData.data_day.relativehumidity_mean[index]}% <br />
+                    <FontAwesomeIcon icon={faWind} />{" "}
+                    {getWindDirection(
+                      forecastData.data_day.winddirection[index + 1]
+                    )}{" "}
+                    / {Math.round(forecastData.data_day.windspeed_mean[index])}{" "}
+                    mph <br />
+                    <FontAwesomeIcon icon={faDroplet} />{" "}
+                    {forecastData.data_day.precipitation_probability[index]}% /{" "}
+                    {forecastData.data_day.precipitation[index]} in
+                  </div>
+                )}
               </div>
-              <div className="bg-warning rounded-pill px-2 mt-2 text-white fw-bold">
-                {Math.round(forecastData.data_day.temperature_min[index])} °F
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
