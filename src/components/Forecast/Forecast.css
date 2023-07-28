@@ -1,7 +1,7 @@
 .forecast-card {
     background-color: var(--stormee-grey);
     border-radius: 30px;
-    padding: 1.5rem;
+    padding: 1rem 2rem;
 }
 
 .todays-forecast-card {

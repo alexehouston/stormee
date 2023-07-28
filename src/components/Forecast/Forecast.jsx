@@ -10,8 +10,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./Forecast.css";
 
-const apiKey = import.meta.env.VITE_METEOBLUE_API_KEY;
-
 const weatherIcons = {
   1: "sun",
   2: "cloud-sun",
@@ -32,7 +30,7 @@ const weatherIcons = {
   17: "snowflake",
 };
 
-const Forecast = ({ latitude, longitude }) => {
+const Forecast = ({ latitude, longitude, apiKey }) => {
   const [forecastData, setForecastData] = useState(null);
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
 
@@ -47,7 +45,7 @@ const Forecast = ({ latitude, longitude }) => {
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  }, [latitude, longitude]);
+  }, [latitude, longitude, apiKey]);
 
   useEffect(() => {
     fetchData();
@@ -68,15 +66,16 @@ const Forecast = ({ latitude, longitude }) => {
 
   const getWindDirection = (degrees) => {
     const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
-    const index = Math.round(degrees / 45) % 8;
+    const positiveDegrees = (degrees + 360) % 360;
+    const index = Math.round(positiveDegrees / 45) % 8;
     return directions[index];
   };
 
   return (
-    <div className="col-12 d-flex flex-column">
+    <div className="col-8 d-flex">
       <div className="col-lg-12">
         {forecastData && (
-          <div className="d-flex justify-content-around text-center">
+          <div className="d-flex justify-content-between text-center">
             {forecastData.data_day.time.slice(1).map((timeEntry, index) => (
               <div
                 className={`forecast-card d-flex flex-column justify-content-around ${
@@ -139,9 +138,9 @@ const Forecast = ({ latitude, longitude }) => {
 };
 
 Forecast.propTypes = {
-  handleSearch: PropTypes.string.isRequired,
-  latitude: PropTypes.string.isRequired,
-  longitude: PropTypes.string.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  apiKey: PropTypes.string.isRequired,
 };
 
 export default Forecast;
