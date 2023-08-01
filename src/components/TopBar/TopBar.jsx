@@ -17,15 +17,13 @@ export default function TopBar({ handleSearch, location }) {
 
   return (
     <div className="TopBar col-12 d-flex justify-content-between align-items-center mb-5">
-      <div className="d-flex align-items-center col-2">
-        <img
-          src="/assets/favicon.ico"
-          alt="icon"
-          width="50"
-        />
+      <div className="d-flex align-items-center col-1 col-lg-3">
+        <a href="/">
+          <img src="/assets/favicon.ico" alt="icon" width="50" />
+        </a>
         <div className="ps-5">
           <FontAwesomeIcon className="text-lavender" icon={faLocationDot} />
-          <span className="ps-2">{location.city}</span>
+          <span className="ps-2">{location.city}, {location.country}</span>
         </div>
       </div>
       <div className="d-flex align-items-center">
@@ -40,7 +38,7 @@ export default function TopBar({ handleSearch, location }) {
           />
         </form>
       </div>
-      <div className="col-2">
+      <div className="col-1 col-lg-3">
         <img
           className="rounded-pill float-end"
           src="/assets/poro.png"

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
 import mapboxgl from "mapbox-gl";
+import "./MeteoblueMap.css";
 
 const apiKey = import.meta.env.VITE_METEOBLUE_API_KEY;
 
@@ -45,7 +46,7 @@ export default function MeteoblueMap({ latitude, longitude }) {
   }, [latitude, longitude]);
 
   return (
-    <div className="col-8 mt-5">
+    <div className="col-8 mt-5" style={{ height: "25rem" }}>
       <Helmet>
         <script
           src="https://static.meteoblue.com/cdn/mapbox-gl-js/v1.11.1/mapbox-gl.js"
@@ -60,16 +61,12 @@ export default function MeteoblueMap({ latitude, longitude }) {
         />
         <script src="https://static.meteoblue.com/lib/maps-plugin/v0.x/maps-plugin.js" />
       </Helmet>
-      <div
-        className="rounded"
-        id="mapContainer"
-        style={{ height: "400px", width: "100%" }}
-      />
+      <div className="map-container rounded h-100 w-100" id="mapContainer" />
     </div>
   );
 }
 
 MeteoblueMap.propTypes = {
-    latitude: PropTypes.number.isRequired,
-    longitude: PropTypes.number.isRequired,
-  };
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+};

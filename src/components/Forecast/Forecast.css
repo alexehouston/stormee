@@ -39,3 +39,11 @@
 .todays-forecast-card .forecast-temp-hi, .todays-forecast-card .forecast-temp-lo {
     font-size: 1.25rem !important;
 }
+
+.forecast-icon {
+    width: 4rem;
+}
+
+.todays-forecast-card .forecast-icon {
+    width: 6.5rem;
+}

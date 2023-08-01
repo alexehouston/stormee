@@ -2,6 +2,7 @@ import { useState } from "react";
 import TopBar from "../../components/TopBar/TopBar";
 import Forecast from "../../components/Forecast/Forecast";
 import MeteoblueMap from "../../components/MeteoblueMap/MeteoblueMap";
+import Cities from "../../components/Cities/Cities";
 import "./App.css";
 
 const apiKey = import.meta.env.VITE_METEOBLUE_API_KEY;
@@ -11,6 +12,8 @@ export default function App() {
   const [longitude, setLongitude] = useState(-95.635);
   const [location, setLocation] = useState({
     city: "Sugar Land",
+    state: "Texas",
+    country: "United States",
   });
 
   const handleSearch = async (query) => {
@@ -23,6 +26,8 @@ export default function App() {
       if (data.results && data.results[0]) {
         setLocation({
           city: data.results[0].name,
+          state: data.results[0].admin1,
+          country: data.results[0].country,
         });
         setLatitude(data.results[0].lat);
         setLongitude(data.results[0].lon);
@@ -35,8 +40,17 @@ export default function App() {
   return (
     <div className="container-fluid vh-100 p-4 m-0 text-white">
       <TopBar handleSearch={handleSearch} location={location} />
-      <Forecast latitude={latitude} longitude={longitude} apiKey={apiKey} />
-      <MeteoblueMap latitude={latitude} longitude={longitude} apiKey={apiKey} />
+      <div className="row col-12">
+        <Forecast latitude={latitude} longitude={longitude} apiKey={apiKey} />
+      </div>
+      <div className="row col-12">
+        <MeteoblueMap
+          latitude={latitude}
+          longitude={longitude}
+          apiKey={apiKey}
+        />
+        <Cities />
+      </div>
     </div>
   );
 }
