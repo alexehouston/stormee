@@ -1,7 +1,14 @@
 .city {
     background-color: var(--stormee-grey);
     border-radius: 30px;
-    width: 16.5rem;
+    width: 17rem;
     height: 10rem;
     font-size: .9rem;
+}
+
+.city-temps {
+    position: absolute;
+    top: 15%;
+    right: 5%;
+    margin-top: -1.5rem;
 }

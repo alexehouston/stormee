@@ -80,7 +80,7 @@ export default function App() {
           longitude={longitude}
           apiKey={apiKey}
         />
-        <Cities latitude={latitude} longitude={longitude} defaultCities={defaultCities} showDefaultCities={showDefaultCities} />
+        <Cities forecastData={forecastData} latitude={latitude} longitude={longitude} defaultCities={defaultCities} showDefaultCities={showDefaultCities} />
       </div>
     </div>
   );
