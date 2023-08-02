@@ -17,6 +17,7 @@ export default function App() {
     state: "Texas",
     country: "United States",
   });
+  const [showDefaultCities, setShowDefaultCities] = useState(true);
 
   const fetchData = useCallback(async () => {
     try {
@@ -51,11 +52,20 @@ export default function App() {
         });
         setLatitude(data.results[0].lat);
         setLongitude(data.results[0].lon);
+        setShowDefaultCities(false); // Hide default cities after searching
       }
     } catch (error) {
       console.error("Error searching for location:", error);
     }
   };
+
+  // Default cities data
+  const defaultCities = [
+    { name: "Houston" },
+    { name: "Dallas" },
+    { name: "Austin" },
+    { name: "San Antonio" },
+  ];
 
   return (
     <div className="container-fluid vh-100 p-4 m-0 text-white">
@@ -70,7 +80,7 @@ export default function App() {
           longitude={longitude}
           apiKey={apiKey}
         />
-        <Cities forecastData={forecastData} />
+        <Cities latitude={latitude} longitude={longitude} defaultCities={defaultCities} showDefaultCities={showDefaultCities} />
       </div>
     </div>
   );
