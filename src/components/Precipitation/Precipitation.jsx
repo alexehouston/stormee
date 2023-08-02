@@ -23,9 +23,11 @@ export default function Precipitation({ forecastData }) {
         {precipitationData.map((value, index) => (
           <div
             key={index}
-            className="bar rounded-pill"
+            className="bar rounded-pill position-relative"
             style={{ height: `${(value / maxPrecipitation) * 100}%` }}
-          ></div>
+          >
+            <p className="inches text-center position-absolute py-1 px-2 rounded-pill fw-bold">{value}%</p>
+          </div>
         ))}
       </div>
       <div className="labels">

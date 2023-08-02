@@ -6,8 +6,7 @@
 }
 
 .todays-forecast-card {
-    background: rgb(185,213,234);
-    background: linear-gradient(0deg, rgba(185,213,234,1) 78%, rgba(174,202,223,1) 78%);
+    background: linear-gradient(0deg, var(--stormee-sky-blue) 78%, #81beec 78%);
     width: 18rem;
     color: var(--stormee-darkest-black);
 }

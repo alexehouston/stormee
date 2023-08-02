@@ -3,12 +3,15 @@
   justify-content: space-between;
   align-items: flex-end;
   height: 80%;
+  width: 100%;
 }
 
 .bar {
-  width: 10px;
-  background-color: #4fc3f7;
-  margin: 0 5px;
+  width: 0.5rem;
+  background-color: var(--stormee-sky-blue);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 12px;
 }
 
 .labels {
@@ -18,4 +21,13 @@
 
 .day-label {
   margin-top: 1rem;
+}
+
+.inches {
+  position: absolute;
+  top: -2.5rem;
+  left: 0.25rem;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 12px;
 }
