@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import TopBar from "../../components/TopBar/TopBar";
 import Forecast from "../../components/Forecast/Forecast";
 import MeteoblueMap from "../../components/MeteoblueMap/MeteoblueMap";
+import Precipitation from "../../components/Precipitation/Precipitation";
 import Cities from "../../components/Cities/Cities";
 import "./App.css";
 
 const apiKey = import.meta.env.VITE_METEOBLUE_API_KEY;
 
 export default function App() {
+  const [forecastData, setForecastData] = useState(null);
   const [latitude, setLatitude] = useState(29.62);
   const [longitude, setLongitude] = useState(-95.635);
   const [location, setLocation] = useState({
@@ -16,12 +18,30 @@ export default function App() {
     country: "United States",
   });
 
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await fetch(
+        `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=${latitude}&lon=${longitude}&temperature=F&precipitationamount=inch&forecast_days=7&apikey=${apiKey}`
+      );
+      const data = await response.json();
+      setForecastData(data);
+      console.log("Forecast Data:", data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, [latitude, longitude]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   const handleSearch = async (query) => {
     try {
       const response = await fetch(
         `https://www.meteoblue.com/en/server/search/query3?query=${query}&apikey=${apiKey}`
       );
       const data = await response.json();
+      console.log("Search Data:", data);
 
       if (data.results && data.results[0]) {
         setLocation({
@@ -41,7 +61,8 @@ export default function App() {
     <div className="container-fluid vh-100 p-4 m-0 text-white">
       <TopBar handleSearch={handleSearch} location={location} />
       <div className="row col-12">
-        <Forecast latitude={latitude} longitude={longitude} apiKey={apiKey} />
+        <Forecast forecastData={forecastData} latitude={latitude} longitude={longitude} apiKey={apiKey} />
+        <Precipitation forecastData={forecastData} />
       </div>
       <div className="row col-12">
         <MeteoblueMap
@@ -49,7 +70,7 @@ export default function App() {
           longitude={longitude}
           apiKey={apiKey}
         />
-        <Cities />
+        <Cities forecastData={forecastData} />
       </div>
     </div>
   );

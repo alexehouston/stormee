@@ -17,6 +17,7 @@
 body {
     background-color: var(--stormee-darkest-black);
     font-family: 'Lexend', sans-serif;
+    overflow: hidden;
 }
 
 .text-sky-blue {

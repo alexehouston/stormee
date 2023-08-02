@@ -1,0 +1,21 @@
+.chart-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 80%;
+}
+
+.bar {
+  width: 10px;
+  background-color: #4fc3f7;
+  margin: 0 5px;
+}
+
+.labels {
+  display: flex;
+  justify-content: space-between;
+}
+
+.day-label {
+  margin-top: 1rem;
+}

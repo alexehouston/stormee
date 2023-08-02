@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState, useEffect, useCallback } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faDroplet,
@@ -30,38 +30,20 @@ const weatherIcons = {
   17: "../../../public/assets/weather-icons/17.png",
 };
 
-const Forecast = ({ latitude, longitude, apiKey }) => {
-  const [forecastData, setForecastData] = useState(null);
+const Forecast = ({ forecastData }) => {
   const [selectedCardIndex, setSelectedCardIndex] = useState(0);
-
-  const fetchData = useCallback(async () => {
-    try {
-      const response = await fetch(
-        // `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=${latitude}&lon=${longitude}&temperature=F&apikey=${apiKey}`
-        `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=47.558&lon=7.573&asl=279&tz=Europe%2FZurich&name=Basel&format=json&history_days=1&apikey=DEMOKEY&sig=3413036bf33758dd1cc57596bf520ca0`
-      );
-      const data = await response.json();
-      setForecastData(data);
-      console.log("Forecast Data:", data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  }, [latitude, longitude, apiKey]);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
 
   const getDayOfWeek = (dateString) => {
     const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     const date = new Date(dateString);
-    return daysOfWeek[date.getDay()];
+    const dayOfWeekIndex = date.getUTCDay();
+    return daysOfWeek[dayOfWeekIndex];
   };
 
   const getFormattedDate = (dateString) => {
     const date = new Date(dateString);
-    const month = String(date.getMonth() + 1);
-    const day = String(date.getDate());
+    const month = date.getMonth() + 1;
+    const day = date.getDate() + 1;
     return `${month}/${day}`;
   };
 
@@ -75,9 +57,10 @@ const Forecast = ({ latitude, longitude, apiKey }) => {
   return (
     <div className="col-8 d-flex">
       <div className="col-lg-12">
+        <p className="ms-2">7-Day Forecast</p>
         {forecastData && (
           <div className="d-flex justify-content-between text-center">
-            {forecastData.data_day.time.slice(1).map((timeEntry, index) => (
+            {forecastData.data_day.time.map((timeEntry, index) => (
               <div
                 className={`forecast-card d-flex flex-column justify-content-around ${
                   index === selectedCardIndex ? "todays-forecast-card" : ""
@@ -92,12 +75,10 @@ const Forecast = ({ latitude, longitude, apiKey }) => {
                   )}
                 </div>
                 <hr />
-                {forecastData.data_day.pictocode[index + 1] && (
+                {forecastData.data_day.pictocode[index] && (
                   <img
                     className="forecast-icon py-3"
-                    src={
-                      weatherIcons[forecastData.data_day.pictocode[index + 1]]
-                    }
+                    src={weatherIcons[forecastData.data_day.pictocode[index]]}
                     alt="Weather Icon"
                   />
                 )}
@@ -110,7 +91,6 @@ const Forecast = ({ latitude, longitude, apiKey }) => {
                   <div className="todays-forecast-data text-start">
                     <FontAwesomeIcon icon={faArrowUpLong} />{" "}
                     {Math.round(forecastData.data_day.temperature_max[index])}°{" "}
-                    <br />
                     <FontAwesomeIcon icon={faArrowDownLong} />{" "}
                     {Math.round(forecastData.data_day.temperature_min[index])}°{" "}
                     <br />
@@ -140,9 +120,7 @@ const Forecast = ({ latitude, longitude, apiKey }) => {
 };
 
 Forecast.propTypes = {
-  latitude: PropTypes.number.isRequired,
-  longitude: PropTypes.number.isRequired,
-  apiKey: PropTypes.string.isRequired,
+  forecastData: PropTypes.object,
 };
 
 export default Forecast;
