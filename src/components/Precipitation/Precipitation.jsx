@@ -19,7 +19,7 @@ export default function Precipitation({ forecastData }) {
   return (
     <div className="Precipitation col-4 ps-5 pe-2">
       <p>Precipitation</p>
-      <div className="chart-container">
+      <div className="chart-container pt-5">
         {precipitationData.map((value, index) => (
           <div
             key={index}
