@@ -22,7 +22,7 @@ export default function App() {
   const fetchData = useCallback(async () => {
     try {
       const response = await fetch(
-        `http://my.meteoblue.com/packages/basic-1h_basic-day?lat=${latitude}&lon=${longitude}&temperature=F&precipitationamount=inch&forecast_days=7&apikey=${apiKey}`
+        `https://my.meteoblue.com/packages/basic-1h_basic-day?lat=${latitude}&lon=${longitude}&temperature=F&precipitationamount=inch&forecast_days=7&apikey=${apiKey}`
       );
       const data = await response.json();
       setForecastData(data);
