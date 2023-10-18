@@ -1,25 +1,26 @@
 .city {
-    background-color: var(--stormee-grey);
-    border-radius: 30px;
-    width: 17rem;
-    height: 10rem;
-    font-size: .9rem;
-}
-
-.city-temps {
-    position: absolute;
-    top: 15%;
-    right: 5%;
-    margin-top: -1.5rem;
+  background-color: var(--stormee-grey);
+  border-radius: 30px;
+  width: 17rem;
+  height: 10rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media screen and (max-width: 700px) {
-    .Cities {
-        height: 95vh !important;
-        padding: 0 1rem !important;
-    }
+  .Cities {
+    height: 95vh !important;
+    padding: 0 1rem !important;
+  }
 
-    .city {
-        width: 100%;
-    }
+  .city {
+    width: 100%;
+    font-size: .9rem;
+  }
+
+  .city-temps {
+    margin-top: .5rem;
+  }
 }

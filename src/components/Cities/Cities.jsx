@@ -67,7 +67,7 @@ export default function Cities({
                 icon={faLocationDot}
                 className="text-lavender pe-1"
               />{" "}
-              <span className="position-absolute">{city.name}</span>
+              <span className="city-name">{city.name}</span>
               {forecastData && forecastData.data_day && (
                 <div className="city-weather position-relative">
                   <div className="city-temps d-flex justify-content-between align-items-center">
@@ -92,7 +92,7 @@ export default function Cities({
                       °{" "}
                     </div>
                   </div>
-                  <div className="pt-5 pe-2">
+                  <div>
                     <div className="d-flex justify-content-between align-items-center pt-2">
                       <div>
                         <FontAwesomeIcon
@@ -138,12 +138,12 @@ export default function Cities({
           ))}
         {!showDefaultCities &&
           nearbyCities.slice(1, 5).map((city, index) => (
-            <div className="city p-3 ps-4 mb-3 mt-2" key={index}>
+            <div className="city px-4 py-3 mb-3 mt-2" key={index}>
               <FontAwesomeIcon
                 icon={faLocationDot}
                 className="text-lavender pe-1"
               />{" "}
-              <span className="position-absolute">{city.name}</span>
+              <span className="city-name">{city.name}</span>
               {forecastData && forecastData.data_day && (
                 <div className="city-weather position-relative">
                   <div className="city-temps d-flex justify-content-between align-items-center">
@@ -168,7 +168,7 @@ export default function Cities({
                       °{" "}
                     </div>
                   </div>
-                  <div className="pt-5 pe-2">
+                  <div>
                     <div className="d-flex justify-content-between align-items-center pt-2">
                       <div>
                         <FontAwesomeIcon
