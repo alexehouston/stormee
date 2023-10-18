@@ -1,9 +1,27 @@
 .search-bar {
-    background-color: var(--stormee-grey);
-    border: none;
+  background-color: var(--stormee-grey);
+  border: none;
 }
 
 input[type]:focus-visible {
-    outline: none;
-    text-decoration: none;
+  outline: none;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 567px) {
+  .TopBar img {
+    width: 40px;
+  }
+
+  .location {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background: #1b1b1d50;
+    backdrop-filter: blur(10px);
+    width: 100%;
+    padding: 1rem;
+    z-index: 1;
+    text-align: center;
+  }
 }

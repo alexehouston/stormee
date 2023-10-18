@@ -54,7 +54,7 @@ export default function Cities({
   };
 
   return (
-    <div className="col-4 mt-5 pe-0 ps-5" style={{ height: "25rem" }}>
+    <div className="Cities col-12 col-lg-4 mt-5 pe-0 ps-5" style={{ height: "25rem" }}>
       <p>Nearby Areas</p>
       <div
         className="d-flex flex-wrap justify-content-between"

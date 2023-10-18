@@ -17,7 +17,7 @@ export default function Precipitation({ forecastData }) {
   const maxPrecipitation = Math.max(...precipitationData);
 
   return (
-    <div className="Precipitation col-4 ps-5 pe-2">
+    <div className="Precipitation col-12 col-lg-4 ps-5 pe-2">
       <p>Precipitation</p>
       <div className="chart-container pt-5">
         {precipitationData.map((value, index) => (

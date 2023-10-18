@@ -55,11 +55,11 @@ const Forecast = ({ forecastData }) => {
   };
 
   return (
-    <div className="col-8 d-flex">
-      <div className="col-lg-12">
+    <div className="col-12 col-lg-8 d-flex">
+      <div className="col-12">
         <p className="ms-2">7-Day Forecast</p>
         {forecastData && (
-          <div className="d-flex justify-content-between text-center">
+          <div className="forecast-card-container d-flex justify-content-between text-center">
             {forecastData.data_day.time.map((timeEntry, index) => (
               <div
                 className={`forecast-card d-flex flex-column justify-content-around ${

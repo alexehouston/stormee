@@ -28,7 +28,7 @@
     position: absolute;
     right: 15%;
     bottom: 30%;
-    font-size: 5rem !important;
+    width: 6.5rem;
 }
 
 .todays-forecast-card .forecast-temp {
@@ -44,6 +44,54 @@
     width: 3.5rem;
 }
 
-.todays-forecast-card .forecast-icon {
-    width: 6.5rem;
+@media screen and (max-width: 700px) {
+    .forecast-card-container {
+        flex-direction: column;
+        height: 48rem;
+    }
+
+    .forecast-card, .todays-forecast-card {
+        width: 100%;
+    }
+
+    .forecast-card {
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center;
+        height: 5rem;
+    }
+
+    .todays-forecast-card {
+        background: linear-gradient(0deg, var(--stormee-sky-blue) 70%, #81beec 70%);
+        height: 12rem;
+    }
+    
+    .forecast-icon {
+        width: 2.5rem;
+    }
+
+    .todays-forecast-card .forecast-icon {
+        width: 3.5rem;
+        bottom: 15%;
+        right: 36%;
+    }
+
+    .todays-forecast-card .forecast-date {
+        position: absolute;
+        left: 9%;
+        top: 9%;
+        width: 82%;
+    }
+
+    .todays-forecast-card .forecast-temp {
+        position: absolute;
+        right: 5%;
+        bottom: 17%;
+    }
+
+    .todays-forecast-card .todays-forecast-data {
+        position: absolute;
+        left: 9%;
+        bottom: 7%;
+    }
 }

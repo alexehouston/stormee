@@ -23,7 +23,7 @@ export default function TopBar({ handleSearch, location }) {
         </a>
         <div className="ps-5">
           <FontAwesomeIcon className="text-lavender" icon={faLocationDot} />
-          <span className="ps-2">{location.city}, {location.country}</span>
+          <span className="location ps-2">{location.city}, {location.country}</span>
         </div>
       </div>
       <div className="d-flex align-items-center">

@@ -17,10 +17,10 @@
 .labels {
   display: flex;
   justify-content: space-between;
-  font-size: .8rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  padding: 0 .2rem;
-  opacity: .5;
+  padding: 0 0.2rem;
+  opacity: 0.5;
 }
 
 .day-label {
@@ -34,4 +34,11 @@
   transform: translateX(-50%);
   color: #fff;
   font-size: 12px;
+}
+
+@media screen and (max-width: 700px) {
+  .Precipitation {
+    margin: 3rem 0;
+    padding-left: 1rem !important;
+  }
 }

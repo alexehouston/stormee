@@ -12,3 +12,14 @@
     right: 5%;
     margin-top: -1.5rem;
 }
+
+@media screen and (max-width: 700px) {
+    .Cities {
+        height: 85vh !important;
+        padding: 0 1rem !important;
+    }
+
+    .city {
+        width: 100%;
+    }
+}

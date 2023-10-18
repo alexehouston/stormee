@@ -46,7 +46,7 @@ export default function MeteoblueMap({ latitude, longitude }) {
   }, [latitude, longitude]);
 
   return (
-    <div className="col-8 mt-5" style={{ height: "25rem" }}>
+    <div className="col-12 col-lg-8 mt-5" style={{ height: "25rem" }}>
       <Helmet>
         <script
           src="https://static.meteoblue.com/cdn/mapbox-gl-js/v1.11.1/mapbox-gl.js"
