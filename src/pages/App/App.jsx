@@ -26,7 +26,7 @@ export default function App() {
       );
       const data = await response.json();
       setForecastData(data);
-      console.log("Forecast Data:", data);
+      // console.log("Forecast Data:", data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
