@@ -21,9 +21,9 @@ export default function TopBar({ handleSearch, location }) {
         <a href="/">
           <img src="/assets/favicon.ico" alt="icon" width="50" />
         </a>
-        <div className="ps-5">
+        <div className="location ps-5">
           <FontAwesomeIcon className="text-lavender" icon={faLocationDot} />
-          <span className="location ps-2">{location.city}, {location.country}</span>
+          <span className="ps-2">{location.city}, {location.country}</span>
         </div>
       </div>
       <div className="d-flex align-items-center">

@@ -20,7 +20,7 @@ input[type]:focus-visible {
     background: #1b1b1d50;
     backdrop-filter: blur(10px);
     width: 100%;
-    padding: 1rem;
+    padding: 1rem !important;
     z-index: 1;
     text-align: center;
   }
