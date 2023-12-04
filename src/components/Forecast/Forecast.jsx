@@ -55,7 +55,7 @@ const Forecast = ({ forecastData }) => {
   };
 
   return (
-    <div className="col-12 col-lg-8 d-flex">
+    <div className="col-12 col-md-12 col-lg-8 d-flex">
       <div className="col-12">
         <p className="ms-2">7-Day Forecast</p>
         {forecastData && (

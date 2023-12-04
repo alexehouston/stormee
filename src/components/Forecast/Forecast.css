@@ -44,7 +44,7 @@
     width: 3.5rem;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 850px) {
     .forecast-card-container {
         flex-direction: column;
         height: 48rem;

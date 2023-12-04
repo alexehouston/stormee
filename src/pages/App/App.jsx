@@ -70,11 +70,11 @@ export default function App() {
   return (
     <div className="App container-fluid vh-100 p-4 m-0 text-white">
       <TopBar handleSearch={handleSearch} location={location} />
-      <div className="forecast-precipitation row col-12">
+      <div className="forecast-precipitation row mx-auto col-12">
         <Forecast forecastData={forecastData} latitude={latitude} longitude={longitude} apiKey={apiKey} />
         <Precipitation forecastData={forecastData} />
       </div>
-      <div className="map-cities row col-12">
+      <div className="map-cities row mx-auto col-12">
         <MeteoblueMap
           latitude={latitude}
           longitude={longitude}
